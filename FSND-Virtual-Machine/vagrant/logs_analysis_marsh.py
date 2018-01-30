@@ -29,22 +29,23 @@ def welcome_banner():
     print("-------------------------------------------------")
     print("Welcome to Jason's Python Database Query Machine!")
     print("-------------------------------------------------")
-    print("")
     print_menu()
 
 def print_menu(): # Displays options user can select
+    print("")
     print("1) Top 3 Articles")
     print("2) Top Authors")
     print("3) Unfinished")
     print("4) Exit")
     print("")
 
-
 def prompt_user():
+    print("")
     user_input = input("Select an option 1-4: ")
     print_menu()
     if user_input == '1':
         print("Printing top 3 articles based on views...")
+        print("")
         time.sleep(.2)
 
         """Test function to establish proper syntax for interacting with db."""
