@@ -1,0 +1,7 @@
+__pycache__
+*.pyc
+.vagrant
+notes.md
+newsdata.sql
+FSND-Virtual-Machine/vagrant/Vagrantfile
+.DS_Store
