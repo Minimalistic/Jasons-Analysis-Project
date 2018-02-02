@@ -33,7 +33,7 @@ answer_1 = ('SELECT title, num_views                                     \
 answer_2 = ('SELECT authors.name, x_view.sum                             \
             FROM x_view, authors                                         \
             WHERE x_view.author = authors.id                             \
-            ORDER BY sum DESC;')
+            ORDER BY sum DESC LIMIT 3;')
 
 def connect(database_name="news"):
     """Prepare database if it exists and create necessary views."""
