@@ -1,8 +1,14 @@
 import psycopg2
 import time 
-import sys  
+import sys
 
-"""SQL Views"""
+"""Ensure user uses python 3 or greater"""
+
+if sys.version_info[0] < 3:
+    raise Exception("A minimum of Python version 3 is required to run.")
+
+
+"""Prepare SQL Views"""
 
 view_top_slugs = ("CREATE OR REPLACE VIEW top_slugs_view AS SELECT path, \
                     COUNT(*) AS num_views FROM log                       \
@@ -16,7 +22,8 @@ alt_view = ("CREATE OR REPLACE VIEW alt_view AS SELECT author, num_views \
 x_view = ("CREATE OR REPLACE VIEW x_view AS SELECT author, sum(num_views)           \
             FROM alt_view                                                \
             GROUP BY author;")
-# Queries
+
+"""Prepare Query answers"""
 
 answer_1 = ('SELECT title, num_views                                     \
             FROM articles, top_slugs_view                                \
@@ -26,7 +33,7 @@ answer_1 = ('SELECT title, num_views                                     \
 answer_2 = ('SELECT authors.name, x_view.sum                             \
             FROM x_view, authors                                         \
             WHERE x_view.author = authors.id                             \
-            ORDER BY sum desc;')
+            ORDER BY sum DESC;')
 
 def connect(database_name="news"):
     """Prepare database if it exists and create necessary views."""
@@ -40,11 +47,10 @@ def connect(database_name="news"):
     except:
         print("<Error, no database found.>")
 
-def slow_text():
-    sys.stdout.write(l)
-    sys.stdout.flush()
-    print("")
-    time.sleep(0.05)
+def slowPrint(string):
+    for character in string:
+        print(character)
+        time.sleep(.05)
 
 welcome_banner = ('',
                   '-' * 50,
@@ -52,31 +58,29 @@ welcome_banner = ('',
                   '-' * 50,)
 help_prompt = "Type \"help\" for available commands."
 
-text_menu = ('1) Top 3 Articles', # Displays options user can select
+text_menu = ('1) Top 3 Articles',
              '2) Top Authors',
              '3) Unfinished',
              '4) Exit')
 
 def queryTop3Articles():
+    """Return the 3 most popular articles."""
     db, cursor = connect()
     cursor.execute(answer_1)
     results = cursor.fetchall()
-    for results in results:
-        print(results)
-        time.sleep(.05)
+    slowPrint(results)
     db.close()
 
 def queryTop3Authors():
+    """Return the 3 most popular authors."""
     db, cursor = connect()
     cursor.execute(answer_2)
     results = cursor.fetchall()
-    for results in results:
-        print(results)
-        time.sleep(.05)
+    slowPrint(results)
     db.close()
 
 def prompt_user():
-    """Displays main command prompt user uses to interact with program"""
+    """Display main command prompt used for interacting with program."""
     print(help_prompt)
     user_input = input("Select an option 1-4: ")
 
@@ -104,13 +108,9 @@ def prompt_user():
 
     prompt_user()
 
-for l in welcome_banner:
-    slow_text()
-
-for l in text_menu:
-    slow_text()
-
-prompt_user()                    # Accept user commands
+slowPrint(welcome_banner)       # Print program start banner to user
+slowPrint(text_menu)            # Display available commands in the menu
+prompt_user()                   # Accept user commands
 
 
 
