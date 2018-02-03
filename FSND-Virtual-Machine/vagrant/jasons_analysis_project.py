@@ -57,8 +57,9 @@ answer_3 = ('SELECT hits_day_view.date,                                  \
             GROUP BY hits_day_view.date                                  \
             ORDER BY bad_requests DESC LIMIT 1;')
 
+
 def connect(database_name="news"):
-    """Prepare database if it exists and create necessary views."""
+    """Connect to database if it exists and create necessary views."""
     try:
         db = psycopg2.connect("dbname={}".format(database_name))
         cursor = db.cursor()
@@ -71,11 +72,18 @@ def connect(database_name="news"):
     except:
         print("<Error, no database found.>")
 
-def slowPrint(string):
-    """Slow down text printed to user."""
+
+def cleanPrint(y):
+    for x in y:
+        print('-', x[0], x[1])
+
+
+def listPrinter(string):
+    """Prints at a reduced rate as a list"""
     for character in string:
         print(character)
         time.sleep(.05)
+
 
 def printDivider(x):
     print('-' * len(x))
@@ -89,6 +97,7 @@ text_menu = ('1) Top 3 Articles',
              '3) Days With Greatest Percent Request Errors',
              '4) Exit')
 
+
 def queryTop3Articles():
     """Return the 3 most popular articles."""
     db, cursor = connect()
@@ -96,6 +105,7 @@ def queryTop3Articles():
     results = cursor.fetchall()
     cleanPrint(results)
     db.close()
+
 
 def queryTop3Authors():
     """Return the 3 most popular authors."""
@@ -105,9 +115,6 @@ def queryTop3Authors():
     cleanPrint(results)
     db.close()
 
-def cleanPrint(y):
-    for x in y:
-        print('|', x[0], x[1], '|')
 
 def queryTopRequestErrors():
     """Return the 3 most popular authors."""
@@ -116,6 +123,7 @@ def queryTopRequestErrors():
     results = cursor.fetchall()
     cleanPrint(results)
     db.close()
+
 
 def prompt_user():
     """Display main command prompt used for interacting with program."""
@@ -131,22 +139,19 @@ def prompt_user():
         time.sleep(.2)
         queryTop3Authors()
     elif user_input == '3':
-        printDivider("Preparing data on days where more than one percent of " + 
+        printDivider("Preparing data on days where more than one percent of " +
                      "requests lead to errors...")
         time.sleep(.2)
         queryTopRequestErrors()
     elif user_input == '4':
         print("Now quitting program...")
         time.sleep(.2)
-        print("Program exited.") 
+        print("Program exited.")
         return
     else:
         print("Not a recognized command.")
     prompt_user()
 
 printDivider(welcome_banner)    # Print program start banner to user
-slowPrint(text_menu)            # Display available commands in the menu
+listPrinter(text_menu)            # Display available commands in the menu
 prompt_user()                   # Accept user commands
-
-
-
