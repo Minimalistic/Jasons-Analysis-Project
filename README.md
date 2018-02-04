@@ -19,6 +19,7 @@ Udacity Database Querying Project
 
 ### Install Python3
 - [Download python3](https://www.python.org/downloads/)
+
 This project requires Python3 or greater to run, download the version compatible with your operating system.
 
 ### Install VirtualBox 
@@ -26,10 +27,12 @@ This project requires Python3 or greater to run, download the version compatible
 
 ### Install Vagrant
 [Download Vagrant](https://www.vagrantup.com/downloads.html)
+
 Be sure to download and install the appropriate version for your operating system. To confirm that Vagrant has been correctly installed, in your operating systems command prompt type `vagrant --version`, if the response is something akin to `Vagrant 1.8.5` you can proceed to the next step.
 
 ### Download Project
 - [Download Jasons-Analysis-Project](https://github.com/Minimalistic/Jasons-Analysis-Project)
+
 Save the project to a local folder of your choice.
 
 ## Configuration
