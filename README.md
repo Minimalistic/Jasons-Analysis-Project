@@ -88,7 +88,7 @@ CREATE OR REPLACE VIEW hits_day_view AS SELECT
 	FROM log GROUP BY DATE(time);
 ```
 
-### Run jasons_analysis_project.py
+### Run jasons_analysis_project
 From within your running Vagrant VM, ensure you're in the `vagrant` folder that contains `jasons_analysis_project.py` and type the command `python3 jasons_analysis_project.py` and press `enter`.
 
 You should now see something like:
