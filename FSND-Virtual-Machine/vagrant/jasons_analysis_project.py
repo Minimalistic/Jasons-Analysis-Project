@@ -24,38 +24,38 @@ x_view = ("CREATE OR REPLACE VIEW x_view AS SELECT author, sum(num_views)       
             FROM alt_view                                                \
             GROUP BY author;")
 
-errors_view = ("CREATE OR REPLACE VIEW errors_day_view AS SELECT     \
+errors_view = ("CREATE OR REPLACE VIEW errors_day_view AS SELECT         \
                    DATE(time), COUNT(*) AS num_views                     \
                    FROM log                                              \
                    WHERE status = '404 NOT FOUND'                        \
                    GROUP BY status, DATE                                 \
                    ORDER BY num_views DESC;")
 
-hits_view = ("CREATE OR REPLACE VIEW hits_day_view AS SELECT         \
+hits_view = ("CREATE OR REPLACE VIEW hits_day_view AS SELECT             \
                  DATE(time), COUNT(*) AS num_views                       \
                  FROM log GROUP BY DATE(time);")
 
 """Prepare Query answers"""
 
-answer_1 = ('SELECT title, num_views                                     \
+answer_1 = ("SELECT title, num_views                                     \
             FROM articles, top_slugs_view                                \
             WHERE top_slugs_view.path = CONCAT(\'/article/\', slug)      \
-            ORDER BY num_views DESC LIMIT 3;')
+            ORDER BY num_views DESC LIMIT 3;")
 
-answer_2 = ('SELECT authors.name, x_view.sum                             \
+answer_2 = ("SELECT authors.name, x_view.sum                             \
             FROM x_view, authors                                         \
             WHERE x_view.author = authors.id                             \
-            ORDER BY sum DESC LIMIT 31;')
+            ORDER BY sum DESC LIMIT 31;")
 
-answer_3 = ('SELECT hits_day_view.date,                                  \
-            ROUND(SUM(CAST(errors_day_view.num_views AS decimal)          \
+answer_3 = ("SELECT hits_day_view.date,                                  \
+            ROUND(SUM(CAST(errors_day_view.num_views AS decimal)         \
             /                                                            \
-            CAST(hits_day_view.num_views as decimal) * 100), 2)          \
+            CAST(hits_day_view.num_views AS decimal) * 100), 2)          \
             AS bad_requests                                              \
-            FROM hits_day_view, errors_day_view                           \
-            WHERE hits_day_view.date = errors_day_view.date               \
+            FROM hits_day_view, errors_day_view                          \
+            WHERE hits_day_view.date = errors_day_view.date              \
             GROUP BY hits_day_view.date                                  \
-            ORDER BY bad_requests DESC LIMIT 1;')
+            ORDER BY bad_requests DESC LIMIT 1;")
 
 
 def connect(database_name="news"):
@@ -79,7 +79,7 @@ def cleanPrint(y):
 
 
 def listPrinter(string):
-    """Prints at a reduced rate as a list"""
+    """Prints string at a delayed speed as a list"""
     for character in string:
         print(character)
         time.sleep(.05)
@@ -89,6 +89,7 @@ def printDivider(x):
     print('-' * len(x))
     print(x)
     print('-' * len(x))
+    time.sleep(.02)
 
 welcome_banner = ('Welcome to Jason\'s Python Database Query Machine!')
 
@@ -99,7 +100,7 @@ text_menu = ('1) Top 3 Articles',
 
 
 def queryTop3Articles():
-    """Return the 3 most popular articles."""
+    """Returns the 3 most popular articles."""
     db, cursor = connect()
     cursor.execute(answer_1)
     results = cursor.fetchall()
@@ -108,7 +109,7 @@ def queryTop3Articles():
 
 
 def queryTop3Authors():
-    """Return the 3 most popular authors."""
+    """Returns the 3 most popular authors."""
     db, cursor = connect()
     cursor.execute(answer_2)
     results = cursor.fetchall()
@@ -117,7 +118,7 @@ def queryTop3Authors():
 
 
 def queryTopRequestErrors():
-    """Return the 3 most popular authors."""
+    """Returns the days where more than 1% of requests lead to errors."""
     db, cursor = connect()
     cursor.execute(answer_3)
     results = cursor.fetchall()
@@ -132,26 +133,23 @@ def prompt_user():
 
     if user_input == '1':
         printDivider("Preparing top 3 articles based on views...")
-        time.sleep(.2)
         queryTop3Articles()
     elif user_input == '2':
         printDivider("Preparing Top 3 authors based on views...")
-        time.sleep(.2)
         queryTop3Authors()
     elif user_input == '3':
-        printDivider("Preparing data on days where more than one percent of " +
-                     "requests lead to errors...")
-        time.sleep(.2)
+        printDivider("Preparing data on days where more than " +
+                     "one percent of requests lead to errors...")
         queryTopRequestErrors()
     elif user_input == '4':
-        print("Now quitting program...")
-        time.sleep(.2)
+        printDivider("Now exiting program...")
+        time.sleep(.3)
         print("Program exited.")
         return
     else:
-        print("Not a recognized command.")
+        printDivider("Not a recognized command.")
     prompt_user()
 
 printDivider(welcome_banner)    # Print program start banner to user
-listPrinter(text_menu)            # Display available commands in the menu
+listPrinter(text_menu)          # Display available commands in the menu
 prompt_user()                   # Accept user commands
