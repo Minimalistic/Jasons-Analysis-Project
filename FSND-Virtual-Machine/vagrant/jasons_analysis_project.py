@@ -75,7 +75,7 @@ def connect(database_name="news"):
 
 def cleanPrint(y):
     for x in y:
-        print('-', x[0], x[1])
+        print('-->', x[0], '--', x[1])
 
 
 def listPrinter(string):
