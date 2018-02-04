@@ -71,8 +71,9 @@ def connect(database_name="news"):
         cursor.execute(errors_view)
         cursor.execute(hits_view)
         return db, cursor
-    except:
+    except psycopg2.Error as err:
         print("<Error, no database found.>")
+        print("Specific error: " + err.pgerror)
 
 
 def cleanPrint(y):
@@ -92,6 +93,7 @@ def printDivider(x):
     print(x)
     print('-' * len(x))
     time.sleep(.02)
+
 
 welcome_banner = ('Welcome to Jason\'s Python Database Query Machine!')
 
@@ -151,6 +153,7 @@ def prompt_user():
     else:
         printDivider("Not a recognized command.")
     prompt_user()
+
 
 printDivider(welcome_banner)    # Print program start banner to user
 listPrinter(text_menu)          # Display available commands in the menu
