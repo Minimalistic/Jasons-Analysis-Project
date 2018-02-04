@@ -18,16 +18,19 @@ Udacity Database Querying Project
 ## Installation
 
 ### Install Python3
-This project requires Python3 or greater to run, download the version compatible with your operating system from [python.org](https://www.python.org/downloads/).
+[Download python3](https://www.python.org/downloads/)
+This project requires Python3 or greater to run, download the version compatible with your operating system.
 
 ### Install VirtualBox 
-The first step of running this project is to download and install VirtualBox download it from [virtualbox.org](https://www.virtualbox.org/wiki/Download_Old_Builds_5_1).  
+[Download VirtualBox](https://www.virtualbox.org/wiki/Download_Old_Builds_5_1)
 
 ### Install Vagrant
-Download Vagrant from [vagrantup.com](https://www.vagrantup.com/downloads.html), be sure to install the appropriate version for your operating system. To ensure Vagrant has been correctly installed, in your operating systems command prompt type `vagrant --version`, if the response is something akin to `Vagrant 1.8.5` you can proceed to the next step.
+[Download Vagrant](https://www.vagrantup.com/downloads.html)
+Be sure to download and install the appropriate version for your operating system. To confirm that Vagrant has been correctly installed, in your operating systems command prompt type `vagrant --version`, if the response is something akin to `Vagrant 1.8.5` you can proceed to the next step.
 
 ### Download Project
-Go to [GitHub and download or clone the project repository](https://github.com/Minimalistic/Jasons-Analysis-Project) to a local folder of your choice.
+[Download Jasons-Analysis-Project](https://github.com/Minimalistic/Jasons-Analysis-Project)
+Save the project to a local folder of your choice.
 
 ## Configuration
 
@@ -35,10 +38,12 @@ Go to [GitHub and download or clone the project repository](https://github.com/M
 Using a terminal or command prompt, navigate to the project directory and type `vagrant up` to start preparing the vagrant environment.  It may take a few minutes depending on internet speed etc.  When the process has completed, run `vagrant ssh` and you will be logged in to your VM.
 
 ### Download newsdata.sql
-newsdata.sql is the sql database that this project will query information from.  Download newsdata.sql and place it in the vagrant directory that's shared with your newly started VM, specifically place the folder here `~/Jasons-Analysis-Project/FSND-Virtual-Machine/vagrant/newsdata.sql` in the same folder as `jasons_analysis_project.py`.
+[Download newsdata.sql](https://d17h27t6h515a5.cloudfront.net/topher/2017/August/59822701_fsnd-virtual-machine/fsnd-virtual-machine.zip)
+Within the `.zip` file, you specifically need `newsdata.sql`.  `newsdata.sql` is the database that this project will query information from.  Download it and place it in the vagrant directory that's shared with your newly started VM, specifically place the file here `~/Jasons-Analysis-Project/FSND-Virtual-Machine/vagrant/newsdata.sql` in the same folder as `jasons_analysis_project.py`.
 
 ### Prepare Newsdata Database
-Within your running Vagrant VM, run the command `psql -d news -f newsdata.sql;`
+Within your running Vagrant VM, run the command:
+`psql -d news -f newsdata.sql;`
 
 ## Running Project
 
