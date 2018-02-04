@@ -12,7 +12,7 @@ Udacity Database Querying Project
 	- [Download newsdata.sql](#download-newsdata.sql)
 	- [Prepare Newsdata Database](#prepare-newsdata-database)
 - [Running Project](#running-project)
-	- [Run jasons_analysis_project.py](#jasons_analysis_project.py)
+	- [Run jasons_analysis_project.py](#run-jasons_analysis_project.py)
 
 ## Installation
 
