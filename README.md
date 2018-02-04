@@ -12,6 +12,7 @@ Udacity Database Querying Project
 	- [Download newsdata.sql](#download-newsdata.sql)
 	- [Prepare Newsdata Database](#prepare-newsdata-database)
 - [Running Project](#running-project)
+	- [Create Views](#create-views)
 	- [Run jasons_analysis_project](#run-jasons_analysis_project)
 
 ## Installation
