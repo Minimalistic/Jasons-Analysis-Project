@@ -18,7 +18,7 @@ Udacity Database Querying Project
 ## Installation
 
 ### Install Python3
-- [Download python3](https://www.python.org/downloads/)
+[Download python3](https://www.python.org/downloads/)
 
 This project requires Python3 or greater to run, download the version compatible with your operating system.
 
