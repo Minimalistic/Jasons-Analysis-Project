@@ -48,8 +48,8 @@ Within your running Vagrant VM, run the command `psql -d news -f newsdata.sql;`
 Regardless, here are the following views that are created by the project upon start:
 
 `top_slugs_view`
-```
-CREATE OR REPLACE VIEW top_slugs_view AS SELECT path, 
+```sql
+CREATE OR REPLACE VIEW top_slugs_view AS SELECT path,
 	COUNT(*) AS num_views FROM log                       
 	WHERE status = '200 OK'                              
 	AND NOT path = '/'                                   
@@ -57,7 +57,7 @@ CREATE OR REPLACE VIEW top_slugs_view AS SELECT path,
 ```
 
 `alt_view`
-```
+```sql
 CREATE OR REPLACE VIEW alt_view AS SELECT author, num_views
     FROM articles, top_slugs_view
     WHERE top_slugs_view.path = CONCAT('/article/', slug)
@@ -65,14 +65,14 @@ CREATE OR REPLACE VIEW alt_view AS SELECT author, num_views
 ```
 
 `x_view`
-```
+```sql
 CREATE OR REPLACE VIEW x_view AS SELECT author, sum(num_views)
     FROM alt_view
     GROUP BY author;
 ```
 
 `errors_day_view`
-```
+```sql
 CREATE OR REPLACE VIEW errors_day_view AS SELECT
 	DATE(time), COUNT(*) AS num_views
 	FROM log
@@ -82,7 +82,7 @@ CREATE OR REPLACE VIEW errors_day_view AS SELECT
 ```
 
 `hits_day_view`
-```
+```sql
 CREATE OR REPLACE VIEW hits_day_view AS SELECT
 	DATE(time), COUNT(*) AS num_views
 	FROM log GROUP BY DATE(time);
@@ -103,4 +103,4 @@ Welcome to Jason's Python Database Query Machine!
 
 Select an option 1-4: 
 ```
-Enter a number 1 through 3 to query information from the database or enter 4 to exit the project.
+Enter a number `1` through `3` to query information from the database or enter `4` to exit the project.
