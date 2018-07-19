@@ -1,4 +1,7 @@
 # Jasons-Analysis-Project
+
+![Jasons Tech Interview Practice Project Cover Image](log-analysis-cover-image.jpg)
+
 This project's goal is to answer the following three questions:
 - 1. What are the most popular three articles of all time? 
 - 2. Who are the most popular article authors of all time?
